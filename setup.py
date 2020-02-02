@@ -10,7 +10,7 @@ setup(
     packages=['pyhanga'],
     author='Sivadon Chaisiri',
     author_email='javaboom@gmail.com',    
-    version=VERSION,
+    version=0.9001,
     license='MIT',
     description = 'Custom Python-based CloudFormation Command Line Interface',
     url = 'https://github.com/boomary/pyhanga',   
