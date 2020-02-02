@@ -83,7 +83,7 @@ If you don't specify a profile, it implies that you use the default profile (e.g
 
 As you know, AWS manages resources accross AWS Regions. You should specifiy the AWS Region that you want to manage CloudFormation with the -r (--region) option. The option requires a valid AWS Region code (e.g., ap-southeast-2 for Sydney and us-east-1 for North Virginia). This following link would be helpful for you: https://docs.aws.amazon.com/general/latest/gr/rande.html  
 
-Let's say you want to manage a CloudFormation stack with *devprofile* profile in Tokyo region. You specify the -p and -r options together as follows:
+Let's say you want to manage a CloudFormation stack with *devprofile* profile in Tokyo region (i.e., ap-northeast-1). You specify the -p and -r options together as follows:
 
 ```
     pyhanga -p devprofile -r ap-northeast-1 ...
