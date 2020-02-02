@@ -2,18 +2,26 @@
 Custom Python-based CloudFormation Command Line Interface (CLI)
 
 ## Introduction
-PyHanga is a basic CloudFormation CLI for maintaining AWS CloudFormation stacks. The author of PyHanga developed this CLI to be his personal tool for managing CloudFormation stacks. Before the tool, he used the official AWS CLI. The official one is great enough to manage CloudFormation templates. For the author he needed a simpler and more minimal CLI (in his own view). And, that's the beginning of PyHanga. 
 
-Then, he learned that there is the Click package which can be used to build a better CLI. After the Click package was applied to his custom CLI, he migrated its sourcecode to GitHub and named the tool "Hanga" and later "PyHanga". 
+PyHanga is a basic CloudFormation CLI for maintaining AWS CloudFormation stacks. 
+
+I, as the author of PyHanga, first developed this CLI just to be my personal tool for managing CloudFormation stacks. I used AWS Management Console (the web UI) and the official AWS CLI tool a lot before starting to script PyHanga. 
+
+AWS Management Console is cool. But it is somehow a pain when you want to rerun a CloudFormation template multiple times with updated code, tags, or parameters. 
+
+The official AWS CLI is great enough to manage CloudFormation stacks. It does have a CloudFormation command like the *deploy* command which meets my basic requirements. So what? I just want to have fun by creating another custom CLI with options that I will be familiar with. Hence, I first created a large python script for my own greed. 
+
+Later, I learned that there is the Click package which can be used to build a better CLI. After the Click package was applied to my custom CLI, I migrated PyHanga sourcecode to GitHub and named the tool "Hanga" and later "PyHanga". 
 
 ## Prerequisites
-- Python 3 
-- Boto3
-- Click
 
-You need to have a AWS CLI profile (AWS credential and config) for accessing AWS APIs. See https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html for more information about AWS CLI and how a profile can be configured.  
+PyHanga is coded with Python 3 and it uses Boto3 and Click packages. You shall check the *setup.py* file in this repo to see any additional required packages to be added in future.
 
-## Give examples
+You should know CloudFormation. If you want to learn about CloudFormation, you have good [documentation from AWS](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to start with.
+
+Befoer using PyHanga, you must have an AWS CLI profile ready for accessing AWS APIs. See https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html for more information about AWS CLI and how a profile (including credentials and config files) can be configured.  
+
+## How to install
 
 Just run the pip command:
 
@@ -57,7 +65,7 @@ Options:
 
 Commands:
   cost        Estimate monthly cost of a stack
-  create      Create a new stack
+  create      Create a new stack with a change set
   delete      Delete a stack
   devents     Describe events of a stack
   dresource   Describe a resource of a stack
@@ -65,7 +73,7 @@ Commands:
   list        List stacks
   lresources  List resources of a stack
   protect     Enable a stack to be protected from termination
-  update      Create a change set for updating an existing stack and deploy...
+  update      Update an existing stack with a change set
   upload      Upload a file to a bucket
 ```
 
@@ -92,6 +100,7 @@ Let's say you want to manage a CloudFormation stack with *devprofile* profile in
 If you don't specify the region, the default region configured for your active profile is used (e.g., usually the region configured in /.aws/config).
 
 Now let's review how a command is invoked.
+
 
 Each PyHanga command provides basic help information, for example,
 ```
@@ -136,6 +145,32 @@ Some option can be specified more than once. For exampole, the *list* command ha
 ```
 
 See? ... the *field* option does not require a case-sensitive value. 
+
+An option of some command allows to provide a pair of values. This command is *list* and the option is -m (--match-name). You can use this *list* command to search for stack names. For example, you want to find stacks containing "-server-" in their name. You shall execute the following command:
+
+```
+    pyhanga list -m contains -server-
+```
+
+If you want to find stacks containing "-server-" in their names with UPDATE_ROLLBACK_COMPLETE or UPDATE_COMPLETE status, you shall add --match-status (-s) option and run the following command: 
+
+```
+    pyhanga list -m contains -server- -s update_rollback_complete -s update_complete
+```
+
+Next, let's create a stack. Say, we have a YAML CloudFormation template file, named mystack.yaml. We also have JSON files for paramterizing and tagging the stack, named mystack-params.json and mystack-tags.json. And, we will upload the template to an S3 bucket, named pyhanga-bucket-1234 (keep in mind the bucket name must be globally unique). A PyHanga command for creating this CloudFormation stack given the files is like this:
+
+```
+    pyhanga create -n mystack -t mystack.yaml -u -b pyhanga-bucket-1234 --params mystack-params.json --tags mystack-tags.json
+```
+
+The options used in the above command instructs PyHanga to "create a stack with name (-n) *mystack* using parameters (--params) from *mystack-params.json*, tags (--tags) from *mystack-tags.json*, and template file (-t) *mystack.yaml* that will be uploaded (-u) to the S3 bucket *pyhanga-bucket-1234*". If you prefer a less completed command, you shall run the following one:
+
+```
+    pyhanga create -n mystack -b pyhanga-bucket-1234 -u -d
+```
+
+With -d (--default), you tell PyHanga that you want to use default file names. Default files are known by PyHanga that the template file, parameter file, and tage file are named {stackname}.yaml, {stackname}-params.json, and {stackname}-tags.json, respectively. And in our example, the stack name is *mystack* and we prepare all files meeting the default file names.
 
 That's all for this quick tour.
 
