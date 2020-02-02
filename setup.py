@@ -14,7 +14,7 @@ setup(
     license='MIT',
     description = 'Custom Python-based CloudFormation Command Line Interface',
     url = 'https://github.com/boomary/pyhanga',   
-    download_url = 'https://github.com/boomary/pyhanga/archive/v_09.tar.gz', 
+    download_url = 'https://github.com/boomary/pyhanga/archive/v_90.tar.gz', 
     keywords = ['AWS', 'CloudFormation', 'CLI'],    
     install_requires=[
         'click',
