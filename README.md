@@ -1,10 +1,10 @@
-# pyhanga
+# PyHanga
 Custom Python-based CloudFormation Command Line Interface (CLI)
 
 ## Introduction
-Pyhanga is a basic CloudFormation CLI for maintaining AWS CloudFormation stacks. The author of Pyhanga developed this CLI to be his personal tool for managing CloudFormation stacks. Before the tool, he used the official AWS CLI. The official one is great enough to manage CloudFormation templates. For the author he needed a simpler and more minimal CLI (in his own view). And, that's the beginning of Pyhanga. 
+PyHanga is a basic CloudFormation CLI for maintaining AWS CloudFormation stacks. The author of PyHanga developed this CLI to be his personal tool for managing CloudFormation stacks. Before the tool, he used the official AWS CLI. The official one is great enough to manage CloudFormation templates. For the author he needed a simpler and more minimal CLI (in his own view). And, that's the beginning of PyHanga. 
 
-Then, he learned that there is the Click package which can be used to build a better CLI. After the Click package was applied to his custom CLI, he migrated its sourcecode to GitHub and named the tool "Hanga" and later "Pyhanga". 
+Then, he learned that there is the Click package which can be used to build a better CLI. After the Click package was applied to his custom CLI, he migrated its sourcecode to GitHub and named the tool "Hanga" and later "PyHanga". 
 
 ## Prerequisites
 - Python 3 
@@ -35,7 +35,7 @@ And use the following --upgrade for upgrading the package.
 
 ## Quick Tour
 
-Pyhanga CLI has the following basic structure:
+PyHanga CLI has the following basic structure:
 ```
     pyhanga [OPTIONS] [COMMAND] [COMMAND-OPTIONS] ...
 ```
@@ -45,7 +45,7 @@ To see commands and options available
     pyhanga --help
 ```
 
-The output looks like below:
+Here is the output of the above command:
 ```
 Usage: pyhanga [OPTIONS] COMMAND [ARGS]...
 
@@ -68,6 +68,34 @@ Commands:
   update      Create a change set for updating an existing stack and deploy...
   upload      Upload a file to a bucket
 ```
+
+Each Pyhanga command provides basic help information, for example,
+```
+    pyhanga lresources --help
+```
+
+And the output looks like this:
+```
+Usage: pyhanga lresources [OPTIONS]
+
+  List resources of a stack
+
+Options:
+  -m, --max-items INTEGER         Maximum number of resources to be returned
+                                  (default: 200)
+  -f, --field [ResourceType|LogicalResourceId|PhysicalResourceId|LastUpdatedTimestamp|ResourceStatus|ResourceStatusReason|DriftInformation]
+                                  Field to be printed out. You can print out
+                                  one or more fields:
+                                  pyhanga dresources -f
+                                  <field> -f <field> ...
+                                  By default,
+                                  ResourceType, LogicalResourceId,
+                                  ResourceStatus, and Timestamp are printed
+                                  out.
+  -n, --name TEXT                 Stack name  [required]
+  --help                          Show this message and exit.
+```
+
 
 
 
