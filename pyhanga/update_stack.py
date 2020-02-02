@@ -70,6 +70,6 @@ from . import deploy_stack
 @click.command(name='update')
 def update_stack(name, template, bucket, reuse, object_prefix, params, tags, upload, yes, iam, named_iam, default):
     """
-    Create a change set for updating an existing stack and deploy it
+    Update an existing stack with a change set
     """
     deploy_stack.deploy_stack(name, template, bucket, reuse, object_prefix, params, tags, upload, yes, iam, named_iam, default, True)    

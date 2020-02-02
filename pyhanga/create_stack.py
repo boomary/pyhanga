@@ -65,6 +65,6 @@ from . import deploy_stack
 @click.command(name='create')
 def create_stack(name, template, bucket, object_prefix, params, tags, upload, yes, iam, named_iam, default):
     """
-    Create a new stack
+    Create a new stack with a change set
     """
     deploy_stack.deploy_stack(name, template, bucket, False, object_prefix, params, tags, upload, yes, iam, named_iam, default, False)    
