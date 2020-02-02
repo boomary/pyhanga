@@ -69,7 +69,31 @@ Commands:
   upload      Upload a file to a bucket
 ```
 
-Each Pyhanga command provides basic help information, for example,
+You see that there are several useful commands for managing CloudFormation stacks, e.g., *create*, *update*, and *delete* commands for creating, updating, and deleting a stack, respectively.
+
+Aah ... **do not forget that** before you execute any PyHanga command, you need a valid AWS CLI profile ready. You can specify a profile with -p (--profile) option right after the *pyhanga* main command. Say, you have a profile called *devprofile*. Then, you can use this profile like this:
+
+```
+    pyhanga -p devprofile ...
+```
+
+Ahem, don't type '...' and enter. You won't get anything useful. It's just an example. Instead of typing '...', you specify a PyHanga command and its options. 
+
+If you don't specify a profile, it implies that you use the default profile (e.g., the[default] profile usually specified in /.aws/credentials). 
+
+As you know, AWS manages resources accross AWS Regions. You should specifiy the AWS Region that you want to manage CloudFormation with the -r (--region) option. The option requires a valid AWS Region code (e.g., ap-southeast-2 for Sydney and us-east-1 for North Virginia). This following link would be helpful for you: https://docs.aws.amazon.com/general/latest/gr/rande.html  
+
+Let's say you want to manage a CloudFormation stack with *devprofile* profile in Tokyo region. You specify the -p and -r options together as follows:
+
+```
+    pyhanga -p devprofile -r ap-northeast-1 ...
+```
+
+If you don't specify the region, the default region configured for your active profile is used (e.g., usually the region configured in /.aws/config).
+
+Now let's review how a command is invoked.
+
+Each PyHanga command provides basic help information, for example,
 ```
     pyhanga lresources --help
 ```
@@ -97,7 +121,23 @@ Options:
 ```
 
 
+Based on the above help info, you must specify all options with **[required]**. For the *list* command, there is only one required option, i.e., -n (or --name). Let's play with this option.
 
+```
+    pyhanga lresources -n mystack
+```
+
+Then, the command will return resources managed by the given stack name. 
+
+Some option can be specified more than once. For exampole, the *list* command has the -f (or --field) option. Let's see how we can display only LogicalResourceId and then ResourceStatus of each stack. 
+
+```
+    pyhanga lresources -n mystack -f logicalresourceid -f ResourceStatus
+```
+
+See? ... the *field* option does not require a case-sensitive value. 
+
+That's all for this quick tour.
 
 ## Author
 Sivadon Chaisiri (aka javaboom, boomary)
