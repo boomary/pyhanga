@@ -10,11 +10,11 @@ setup(
     packages=['pyhanga'],
     author='Sivadon Chaisiri',
     author_email='javaboom@gmail.com',    
-    version='0.90',
+    version=VERSION,
     license='MIT',
     description = 'Custom Python-based CloudFormation Command Line Interface',
     url = 'https://github.com/boomary/pyhanga',   
-    download_url = 'https://github.com/boomary/pyhanga/archive/v_90.tar.gz', 
+    download_url = 'https://github.com/boomary/pyhanga/archive/v_9001.tar.gz', 
     keywords = ['AWS', 'CloudFormation', 'CLI'],    
     install_requires=[
         'click',

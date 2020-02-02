@@ -26,11 +26,10 @@ from . import upload_object
 from . import pyhanga_util as util
 from . import pyhanga_constants as const
 
-
 def _print_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.echo('hanga 0.01')
+    click.echo('hanga 0.9001')
     ctx.exit()
 
 def _init_profile(ctx, param, value):
