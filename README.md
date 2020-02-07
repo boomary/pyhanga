@@ -146,16 +146,18 @@ Some option can be specified more than once. For exampole, the *list* command ha
 
 See? ... the *field* option does not require a case-sensitive value. 
 
-An option of some command allows to provide a pair of values. This command is *list* and the option is -m (--match-name). You can use this *list* command to search for stack names. For example, you want to find stacks containing "-server-" in their name. You shall execute the following command:
+An option of some command allows to provide a pair of values. This command is *list* and the option is -m (--match-name). You can use this *list* command to search for stack names. For example, you want to find stacks containing "server" keyword in their name. You shall execute the following command:
 
 ```
-    pyhanga list -m contains -server-
+    pyhanga list -m contains server
 ```
 
-If you want to find stacks containing "-server-" in their names with UPDATE_ROLLBACK_COMPLETE or UPDATE_COMPLETE status, you shall add --match-status (-s) option and run the following command: 
+In addition to *contains*, you can use *startswith* or *endswith* for searching for stack names starting with or ending with a specified keyword. 
+
+If you want to find stacks containing "server" in their names with UPDATE_ROLLBACK_COMPLETE or UPDATE_COMPLETE status, you shall add --match-status (-s) option and run the following command: 
 
 ```
-    pyhanga list -m contains -server- -s update_rollback_complete -s update_complete
+    pyhanga list -m contains server -s update_rollback_complete -s update_complete
 ```
 
 Next, let's create a stack. Say, we have a YAML CloudFormation template file, named mystack.yaml. We also have JSON files for paramterizing and tagging the stack, named mystack-params.json and mystack-tags.json. And, we will upload the template to an S3 bucket, named pyhanga-bucket-1234 (keep in mind the bucket name must be globally unique). A PyHanga command for creating this CloudFormation stack given the files is like this:
@@ -164,7 +166,7 @@ Next, let's create a stack. Say, we have a YAML CloudFormation template file, na
     pyhanga create -n mystack -t mystack.yaml -u -b pyhanga-bucket-1234 --params mystack-params.json --tags mystack-tags.json
 ```
 
-The options used in the above command instructs PyHanga to "create a stack with name (-n) *mystack* using parameters (--params) from *mystack-params.json*, tags (--tags) from *mystack-tags.json*, and template file (-t) *mystack.yaml* that will be uploaded (-u) to the S3 bucket *pyhanga-bucket-1234*". If you prefer a less completed command, you shall run the following one:
+The options used in the above command instructs PyHanga to "create a stack with name (-n) *mystack* using parameters (--params) from *mystack-params.json*, tags (--tags) from *mystack-tags.json*, and template file (-t) *mystack.yaml* that will be uploaded (-u) to the S3 bucket *pyhanga-bucket-1234*". If you prefer a less complicated command, you shall run the following one:
 
 ```
     pyhanga create -n mystack -b pyhanga-bucket-1234 -u -d

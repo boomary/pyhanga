@@ -58,7 +58,8 @@ def _describe_events(name, field, max_items):
                     break
 
                iField = iter(field)
-               row = event[next(iField)]
+               value = event.get(next(iField))
+               row = str(value) if value else const.NULL
 
                for i in iField:
                     value = event.get(i)

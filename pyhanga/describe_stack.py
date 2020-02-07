@@ -45,7 +45,8 @@ def _describe_stack(name, field = const.DEFAULT_DSTACK_FIELDS):
 
     field = util.recaseTuple(field, const.STACK_DETAIL_FILEDS)
     iField = iter(field)
-    row = response[next(iField)]
+    value = response.get(next(iField))
+    row = str(value) if value else const.NULL       
 
     for i in iField:
         value = response.get(i)

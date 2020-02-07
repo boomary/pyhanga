@@ -61,7 +61,8 @@ def _list_resources(name, field, max_items):
                     break
 
                iField = iter(field)
-               row = resource[next(iField)]
+               value = resource.get(next(iField))
+               row = str(value) if value else const.NULL
 
                for i in iField:
                     value = resource.get(i)

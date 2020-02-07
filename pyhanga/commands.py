@@ -29,7 +29,7 @@ from . import pyhanga_constants as const
 def _print_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.echo('hanga 0.9001')
+    click.echo('hanga 0.901')
     ctx.exit()
 
 def _init_profile(ctx, param, value):

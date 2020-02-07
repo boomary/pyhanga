@@ -22,7 +22,7 @@ from . import pyhanga_util as util
               
 
 @click.option('--match-name', '-m',
-                help='Search stacks based on a condition matching their name:\n'
+                help='Search for stacks based on a condition matching their name:\n'
                         'Format: pyhanga -m CHOICE VALUE\n'
                         'VALUE is the string to be searched.\n'
                         'CHOICE is a match condition type that can be contains, startswith, or endswith.\n'
@@ -46,7 +46,6 @@ def list_stacks(field, match_name, match_status):
     List stacks
     """
     _list_stacks(field, match_name, match_status)
-
 
 def _list_stacks(field, match_name, match_status):
     mn_cond, mn_value = match_name
